@@ -14,6 +14,12 @@
 #import "Halfedge.h"
 #import "Vertex.h"
 
+@interface ClayRelaxer()
+
+@property(strong, nonatomic) NSMutableArray *cells;
+
+@end
+
 @implementation ClayRelaxer
 
 
@@ -21,8 +27,8 @@
 {
     self = [super init];
     if (self) {
-        cells = [[NSMutableArray alloc] initWithArray:cellArray];
-        newSites = [[NSMutableArray alloc] init];
+        self.cells = [[NSMutableArray alloc] initWithArray:cellArray];
+        self.freshSites = [[NSMutableArray alloc] init];
         
     }
     return self;
@@ -34,7 +40,7 @@
 {
     ClayRelaxer *cr = [[ClayRelaxer alloc] initWithCells:cellArray];
     [cr processCells];
-    return [cr newSites];
+    return [cr freshSites];
     
 }
 
@@ -42,8 +48,8 @@
 {
     //NSLog(@"Processing Cells...");
     // Iterate through each cell, process its sites, and then 
-    // put the new site into the newSites array. 
-    for (Cell *c in cells) {
+    // put the new site into the freshSites array.
+    for (Cell *c in self.cells) {
         
         // Put the point from the cell into this array, which we'll process
         NSMutableArray *cellPoints = [[NSMutableArray alloc] init];
@@ -69,14 +75,8 @@
         newX = newX / countPoints;
         newY = newY / countPoints;
         
-        [newSites addObject:[NSValue valueWithPoint:NSMakePoint(newX, newY)]];
+        [self.freshSites addObject:[NSValue valueWithPoint:NSMakePoint(newX, newY)]];
     }
     //NSLog(@"...completed processing cells.");
 }
-
-- (NSMutableArray *)newSites
-{
-    return newSites;
-}
-
 @end

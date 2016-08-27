@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6F58B94B1526349900923BA9 /* ClayPathMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58B94A1526349900923BA9 /* ClayPathMaker.m */; };
 		6F58B94E1526959A00923BA9 /* ClayRelaxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58B94D1526959A00923BA9 /* ClayRelaxer.m */; };
-		6F76ACB71523D8640029416F /* VoronoiConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F76ACB61523D8640029416F /* VoronoiConstants.m */; };
 		6F7BC92E151BC2750013CDD7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7BC92D151BC2750013CDD7 /* Cocoa.framework */; };
 		6F7BC938151BC2750013CDD7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F7BC936151BC2750013CDD7 /* InfoPlist.strings */; };
 		6F7BC93A151BC2750013CDD7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7BC939151BC2750013CDD7 /* main.m */; };
@@ -35,8 +34,6 @@
 		6F58B94A1526349900923BA9 /* ClayPathMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClayPathMaker.m; sourceTree = "<group>"; };
 		6F58B94C1526959A00923BA9 /* ClayRelaxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClayRelaxer.h; sourceTree = "<group>"; };
 		6F58B94D1526959A00923BA9 /* ClayRelaxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClayRelaxer.m; sourceTree = "<group>"; };
-		6F76ACB51523D8640029416F /* VoronoiConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoronoiConstants.h; sourceTree = "<group>"; };
-		6F76ACB61523D8640029416F /* VoronoiConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoronoiConstants.m; sourceTree = "<group>"; };
 		6F7BC929151BC2750013CDD7 /* objcvoronoi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = objcvoronoi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7BC92D151BC2750013CDD7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		6F7BC930151BC2750013CDD7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -161,8 +158,6 @@
 				6F58B94A1526349900923BA9 /* ClayPathMaker.m */,
 				6F58B94C1526959A00923BA9 /* ClayRelaxer.h */,
 				6F58B94D1526959A00923BA9 /* ClayRelaxer.m */,
-				6F76ACB51523D8640029416F /* VoronoiConstants.h */,
-				6F76ACB61523D8640029416F /* VoronoiConstants.m */,
 				6F7BC971151CE87C0013CDD7 /* VoronoiResult.h */,
 				6F7BC972151CE87C0013CDD7 /* VoronoiResult.m */,
 				6F7BC95E151C1AB90013CDD7 /* RBTree.h */,
@@ -211,7 +206,7 @@
 		6F7BC920151BC2750013CDD7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "The Perihelion Group";
 			};
 			buildConfigurationList = 6F7BC923151BC2750013CDD7 /* Build configuration list for PBXProject "objcvoronoi" */;
@@ -263,7 +258,6 @@
 				6FD9DCAA15221268006E3B85 /* Halfedge.m in Sources */,
 				6FD9DCAE15225267006E3B85 /* VoronoiController.m in Sources */,
 				6FD9DCB115225663006E3B85 /* VoronoiView.m in Sources */,
-				6F76ACB71523D8640029416F /* VoronoiConstants.m in Sources */,
 				6F58B94B1526349900923BA9 /* ClayPathMaker.m in Sources */,
 				6F58B94E1526959A00923BA9 /* ClayRelaxer.m in Sources */,
 			);
@@ -303,12 +297,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -319,6 +324,9 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -330,16 +338,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
@@ -349,9 +370,11 @@
 		6F7BC948151BC2760013CDD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "objcvoronoi/objcvoronoi-Prefix.pch";
 				INFOPLIST_FILE = "objcvoronoi/objcvoronoi-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.edf.objcvoronoi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -360,9 +383,11 @@
 		6F7BC949151BC2760013CDD7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "objcvoronoi/objcvoronoi-Prefix.pch";
 				INFOPLIST_FILE = "objcvoronoi/objcvoronoi-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.edf.objcvoronoi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

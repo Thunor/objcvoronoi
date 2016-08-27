@@ -12,55 +12,70 @@
 #import "ClayPathMaker.h"
 #import "ClayRelaxer.h"
 
+@interface VoronoiController()
+
+@property(strong, nonatomic) Voronoi *voronoi;
+@property(strong, nonatomic) VoronoiResult *activeResult;
+@property(weak, nonatomic) IBOutlet VoronoiView *voronoiview;
+@property(weak, nonatomic) IBOutlet NSTextField *numSitesEntry;
+@property(weak, nonatomic) IBOutlet NSTextField *marginEntry;
+@property(weak, nonatomic) IBOutlet NSButton *drawButton;
+@property(weak, nonatomic) IBOutlet NSButton *relaxButton;
+
+@property(strong, nonatomic) NSMutableArray *randomPoints;
+
+@end
+
+
 @implementation VoronoiController
 @synthesize xMax, yMax;
 - (id)init
 {
     self = [super init];
     if (self) {
-        randomPoints = [[NSMutableArray alloc] init];
+        self.randomPoints = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (IBAction)relaxWithLloyd:(id)sender
 {
-    NSMutableArray *newSites = [ClayRelaxer relaxSitesInCells:[activeResult cells]];
-    [self newVoronoiWithNewSites:newSites];
+    NSMutableArray *freshSites = [ClayRelaxer relaxSitesInCells:[self.activeResult cells]];
+    [self createVoronoiWithFreshSites:freshSites];
 }
 
-- (IBAction)newVoronoi:(id)sender
+- (IBAction)createVoronoi:(id)sender
 {
-    [randomPoints removeAllObjects];
-    activeResult = nil;
+    [self.randomPoints removeAllObjects];
+    self.activeResult = nil;
     
-    int numSites = [numSitesEntry intValue];
-    int margin   = [marginEntry   intValue];
+    int numSites = [self.numSitesEntry intValue];
+    int margin   = [self.marginEntry   intValue];
     
     // Send in sites as NSPoints that have been converted to NSValue
     
-    xMax = [voronoiview bounds].size.width;
-    yMax = [voronoiview bounds].size.height;
+    xMax = [self.voronoiview bounds].size.width;
+    yMax = [self.voronoiview bounds].size.height;
     
     for (int i = 0; i < numSites; i++) {
         float x = margin + (arc4random() % ((int)xMax - margin*2));
         float y = margin + (arc4random() % ((int)yMax - margin*2));
         NSValue *v = [NSValue valueWithPoint:NSMakePoint(x, y)];
-        [randomPoints addObject:v];
+        [self.randomPoints addObject:v];
     }
     
     [self calculateVoronoi];
 }
 
-- (void)newVoronoiWithNewSites:(NSMutableArray *)newSites
+- (void)createVoronoiWithFreshSites:(NSMutableArray *)freshSites
 {
     // Clear the old
-    [randomPoints removeAllObjects];
-    randomPoints = nil;
-    activeResult = nil;
+    [self.randomPoints removeAllObjects];
+    self.randomPoints = nil;
+    self.activeResult = nil;
     
     // Set the new points
-    randomPoints = newSites;
+    self.randomPoints = freshSites;
     
     // Calculate the diagram
     [self calculateVoronoi];
@@ -69,20 +84,20 @@
 - (void)calculateVoronoi
 {
     
-    voronoi = [[Voronoi alloc] init];
-    activeResult = [voronoi computeWithSites:randomPoints andBoundingBox:[voronoiview bounds]];
+    self.voronoi = [[Voronoi alloc] init];
+    self.activeResult = [self.voronoi computeWithSites:self.randomPoints andBoundingBox:[self.voronoiview bounds]];
     
     NSMutableArray *sitesFromCells = [[NSMutableArray alloc] init];
     
-    for (Cell *c in [activeResult cells]) {
+    for (Cell *c in [self.activeResult cells]) {
         Site *s = [c site];
         [sitesFromCells addObject:[s coordAsValue]];
     }
     
-    [voronoiview setSites:sitesFromCells];
-    [voronoiview setCells:[activeResult cells]];
+    [self.voronoiview setSites:sitesFromCells];
+    [self.voronoiview setCells:[self.activeResult cells]];
     
-    if ([randomPoints count] > 4) {
+    if ([self.randomPoints count] > 4) {
         
         NSValue *start = [NSValue valueWithPoint:NSMakePoint(0, yMax * 0.5)];
         NSValue *end   = [NSValue valueWithPoint:NSMakePoint(xMax, yMax * 0.5)];
@@ -95,17 +110,17 @@
         [pathNodes addObject:midPoint2];
         [pathNodes addObject:end];
         
-        ClayPathMaker *dij = [[ClayPathMaker alloc] initWithEdges:[activeResult edges]
+        ClayPathMaker *dij = [[ClayPathMaker alloc] initWithEdges:[self.activeResult edges]
                                                        nodesForPath:pathNodes
-                                                          andBounds:[voronoiview bounds]];
-        [voronoiview setDijkstraPathPoints:[dij pathNodes]];
+                                                          andBounds:[self.voronoiview bounds]];
+        [self.voronoiview setDijkstraPathPoints:[dij getPathNodes]];
     } else {
-        [voronoiview setDijkstraPathPoints:nil];
+        [self.voronoiview setDijkstraPathPoints:nil];
     }
     
-    [voronoiview setNeedsDisplay:YES];
+    [self.voronoiview setNeedsDisplay:YES];
 
-    [relaxButton setEnabled:YES];
+    [self.relaxButton setEnabled:YES];
     
 }
 

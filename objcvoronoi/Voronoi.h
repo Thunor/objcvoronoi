@@ -14,21 +14,7 @@
 @class Edge;
 @class Vertex;
 
-@interface Voronoi : NSObject {
-    NSMutableArray *edges;
-    NSMutableArray *cells;
-    NSMutableArray *beachsectionJunkyard;
-    NSMutableArray *circleEventJunkyard;
-    
-    RBTree *beachline;
-    RBTree *circleEvents;
-    
-    CircleEvent *firstCircleEvent;
-    
-    NSMutableArray *sites;
-    NSRect boundingBox;
-    
-}
+@interface Voronoi : NSObject
 
 @property (retain, readwrite) CircleEvent *firstCircleEvent;
 

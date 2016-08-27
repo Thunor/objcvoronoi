@@ -3,7 +3,7 @@
 //  objcvoronoi
 //
 
-#import "VoronoiConstants.h"
+//#import "VoronoiConstants.h"
 
 #import "Voronoi.h"
 #import "RBTree.h"
@@ -16,18 +16,33 @@
 #import "Vertex.h"
 #import "Halfedge.h"
 
+float const VORONOI_EPSILON = 0.00005;
+
+@interface Voronoi()
+
+@property(strong, nonatomic) NSMutableArray *edges;
+@property(strong, nonatomic) NSMutableArray *cells;
+@property(strong, nonatomic) NSMutableArray *beachsectionJunkyard;
+@property(strong, nonatomic) NSMutableArray *circleEventJunkyard;
+
+@property(strong, nonatomic) RBTree *beachline;
+@property(strong, nonatomic) RBTree *circleEvents;
+@property(strong, nonatomic) NSMutableArray *sites;
+
+@end
+
 @implementation Voronoi
-@synthesize firstCircleEvent, boundingBox;
+//@synthesize firstCircleEvent, boundingBox;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        sites = [[NSMutableArray alloc] init];
-        edges = [[NSMutableArray alloc] init];
-        cells = [[NSMutableArray alloc] init];
-        beachsectionJunkyard = [[NSMutableArray alloc] init];
-        circleEventJunkyard  = [[NSMutableArray alloc] init];
+        _sites = [[NSMutableArray alloc] init];
+        _edges = [[NSMutableArray alloc] init];
+        _cells = [[NSMutableArray alloc] init];
+        _beachsectionJunkyard = [[NSMutableArray alloc] init];
+        _circleEventJunkyard  = [[NSMutableArray alloc] init];
         
     }
     return self;
@@ -44,12 +59,12 @@
     
     for (NSValue *v in siteList) {
         Site *s = [[Site alloc] initWithValue:v];
-        [sites addObject:s];
+        [self.sites addObject:s];
     }
     
     [self setBoundingBox:bbox];
     
-    NSMutableArray *siteEvents = [[NSMutableArray alloc] initWithArray:sites];
+    NSMutableArray *siteEvents = [[NSMutableArray alloc] initWithArray:self.sites];
     [Site sortSites:siteEvents];
 
     Site *site = [siteEvents lastObject];
@@ -80,7 +95,7 @@
             // Only if site is not a duplicate
             if (site.x != xsitex || site.y != xsitey) {
                 // First, create cell for the new site
-                [cells addObject:[[Cell alloc] initWithSite:site]];
+                [self.cells addObject:[[Cell alloc] initWithSite:site]];
 
                 [site setVoronoiId:siteid];
                 siteid += 1;
@@ -120,36 +135,36 @@
     
     // - prepare return values
     VoronoiResult *result = [[VoronoiResult alloc] init];
-    [result setCells:cells];
-    [result setEdges:edges];
+    [result setCells:self.cells];
+    [result setEdges:self.edges];
     
     return result;
 }
 
 - (void)reset
 {
-    if (!beachline) {
-        beachline = [[RBTree alloc] init];
+    if (!self.beachline) {
+        self.beachline = [[RBTree alloc] init];
     }
     
     // Move leftover beachsections to the beachsection junkyard.
-    if ([beachline root]) {
-        Beachsection *beachsection = [beachline getFirst:[beachline root]];
+    if ([self.beachline root]) {
+        Beachsection *beachsection = [self.beachline getFirst:[self.beachline root]];
         while (beachsection) {
-            [beachsectionJunkyard addObject:beachsection]; // mark for reuse
+            [self.beachsectionJunkyard addObject:beachsection]; // mark for reuse
             beachsection = [beachsection rbNext];
         }
     }
     
-    [beachline setRoot:nil];
-    if (!circleEvents) {
-        circleEvents = [[RBTree alloc] init];
+    [self.beachline setRoot:nil];
+    if (!self.circleEvents) {
+        self.circleEvents = [[RBTree alloc] init];
     }
-    [circleEvents setRoot:nil];
+    [self.circleEvents setRoot:nil];
     [self setFirstCircleEvent:nil];
-    [edges removeAllObjects];
-    [cells removeAllObjects];
-    [sites removeAllObjects];
+    [self.edges removeAllObjects];
+    [self.cells removeAllObjects];
+    [self.sites removeAllObjects];
 }
 
 // Probably unnecessary but created to have parity with the javascript version
@@ -157,7 +172,7 @@
 
 - (Beachsection *)createBeachsection:(Site *)site
 {
-    return [Beachsection createBeachSectionFromJunkyard:beachsectionJunkyard withSite:site];
+    return [Beachsection createBeachSectionFromJunkyard:self.beachsectionJunkyard withSite:site];
 }
 
 - (void)addBeachsection:(Site *)site
@@ -170,7 +185,7 @@
     // created beach section.                                               //
     //////////////////////////////////////////////////////////////////////////
     
-    Beachsection *node = [beachline root];
+    Beachsection *node = [self.beachline root];
     Beachsection *lArc, *rArc;
     float dxl, dxr;
     
@@ -210,7 +225,7 @@
     
     // Create a new beach section object for the site and add it to RB-tree
     Beachsection *newArc = [self createBeachsection:site];
-    [beachline rbInsertSuccessorForNode:lArc withSuccessor:newArc];
+    [self.beachline rbInsertSuccessorForNode:lArc withSuccessor:newArc];
 
     // Cases:
     
@@ -241,7 +256,7 @@
         
         // Split the beach section into two separate beach sections
         rArc = [self createBeachsection:[lArc site]];
-        [beachline rbInsertSuccessorForNode:newArc withSuccessor:rArc];
+        [self.beachline rbInsertSuccessorForNode:newArc withSuccessor:rArc];
         
         // since we have a new transition between two beach sections, a new edge is born
         Edge *e = [self createEdgeWithSite:[lArc site] andSite:[newArc site] andVertex:nil andVertex:nil];
@@ -430,8 +445,8 @@
 {
     // Detach potentially attached circle event
     [self detachCircleEvent:bs];
-    [beachline rbRemoveNode:bs];
-    [beachsectionJunkyard addObject:bs];
+    [self.beachline rbRemoveNode:bs];
+    [self.beachsectionJunkyard addObject:bs];
     
 }
 
@@ -602,9 +617,9 @@
     
     // recycle circle event object if possible
     CircleEvent *circleEvent;
-    if ([circleEventJunkyard count] > 0) {
-        circleEvent = [circleEventJunkyard lastObject];
-        [circleEventJunkyard removeLastObject];
+    if ([self.circleEventJunkyard count] > 0) {
+        circleEvent = [self.circleEventJunkyard lastObject];
+        [self.circleEventJunkyard removeLastObject];
     } else {
         circleEvent = [[CircleEvent alloc] init];
     }
@@ -619,7 +634,7 @@
     // Find insertion point in RB-tree: circle events are ordered from smallest to largest
     
     CircleEvent *predecessor;
-    CircleEvent *node = [circleEvents root];
+    CircleEvent *node = [self.circleEvents root];
     
     while (node) {
         if ([circleEvent y] < [node y] || ([circleEvent y] == [node y] && [circleEvent x] <= [node x])) {
@@ -638,7 +653,7 @@
             }
         }
     }
-    [circleEvents rbInsertSuccessorForNode:predecessor withSuccessor:circleEvent];
+    [self.circleEvents rbInsertSuccessorForNode:predecessor withSuccessor:circleEvent];
     if (!predecessor) {
         [self setFirstCircleEvent:circleEvent];
     }
@@ -649,10 +664,10 @@
     CircleEvent *circle = [arc circleEvent];
     if (circle) {
         if (![circle rbPrevious]) {
-            firstCircleEvent = [circle rbNext];
+            self.firstCircleEvent = [circle rbNext];
         }
-        [circleEvents rbRemoveNode:circle]; // Remove from RB-tree
-        [circleEventJunkyard addObject:circle];
+        [self.circleEvents rbRemoveNode:circle]; // Remove from RB-tree
+        [self.circleEventJunkyard addObject:circle];
         [arc setCircleEvent:nil];
     }
 }
@@ -670,7 +685,7 @@
     
     Edge *edge = [self edgeWithSite:lSite andSite:rSite];
     
-    [edges addObject:edge];
+    [self.edges addObject:edge];
     
     if (va) {
         [self setEdgeStartPointWithEdge:edge lSite:lSite rSite:rSite andVertex:va];
@@ -679,10 +694,10 @@
         [self setEdgeEndPointWithEdge:edge lSite:lSite rSite:rSite andVertex:vb];
     }
     
-    Cell *lCell = [cells objectAtIndex:[lSite voronoiId]];
+    Cell *lCell = [self.cells objectAtIndex:[lSite voronoiId]];
     [lCell addHalfedgeToArray:[[Halfedge alloc] initWithEdge:edge lSite:lSite andRSite:rSite]];
     
-    Cell *rCell = [cells objectAtIndex:[rSite voronoiId]];
+    Cell *rCell = [self.cells objectAtIndex:[rSite voronoiId]];
     [rCell addHalfedgeToArray:[[Halfedge alloc] initWithEdge:edge lSite:rSite andRSite:lSite]];
     
     return edge;
@@ -696,7 +711,7 @@
     [edge setVa:va];
     [edge setVb:vb];
     
-    [edges addObject:edge];
+    [self.edges addObject:edge];
     return edge;
 }
 
@@ -943,12 +958,12 @@
 // Clip/cut edges at the bounding box
 - (void)clipEdges:(NSRect)bbox
 {
-    int iEdge = (int)[edges count];
+    int iEdge = (int)[self.edges count];
     Edge *edge;
     
     // iterate backward so we can splice safely
     while (iEdge--) {
-        edge = [edges objectAtIndex:iEdge];
+        edge = [self.edges objectAtIndex:iEdge];
         // edge is removed if:
         //  it is wholly outside the bounding box
         //  it is actually a point rather than a line
@@ -957,7 +972,7 @@
             || (fabsf([[edge va] x] - [[edge vb] x]) < VORONOI_EPSILON && fabsf([[edge va] y] - [[edge vb] y]) < VORONOI_EPSILON)) {
             [edge setVb:nil];
             [edge setVa:nil];
-            [edges removeObjectAtIndex:iEdge];
+            [self.edges removeObjectAtIndex:iEdge];
         }
     }
 }
@@ -973,7 +988,7 @@
     float yt = bbox.origin.y;
     float yb = bbox.origin.y + bbox.size.height;
     
-    int iCell = (int)[cells count];
+    int iCell = (int)[self.cells count];
     Cell *cell;
     
     NSMutableArray *halfedges;
@@ -985,7 +1000,7 @@
     Vertex *vb;
     
     while (iCell--) {
-        cell = [cells objectAtIndex:iCell];
+        cell = [self.cells objectAtIndex:iCell];
 
         // Trim non full-defined halfedges and sort them counterclockwise
         if (![cell prepare]) {

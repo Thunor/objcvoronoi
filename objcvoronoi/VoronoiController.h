@@ -73,17 +73,17 @@
 @class VoronoiView;
 
 @interface VoronoiController : NSObject {
-    Voronoi *voronoi;
-    VoronoiResult *activeResult;
-    IBOutlet VoronoiView *voronoiview;
-    IBOutlet NSTextField *numSitesEntry;
-    IBOutlet NSTextField *marginEntry;
-    IBOutlet NSButton *drawButton;
-    IBOutlet NSButton *relaxButton;
-    
-    NSMutableArray *randomPoints;
-    float xMax;
-    float yMax;
+//    Voronoi *voronoi;
+//    VoronoiResult *activeResult;
+//    IBOutlet VoronoiView *voronoiview;
+//    IBOutlet NSTextField *numSitesEntry;
+//    IBOutlet NSTextField *marginEntry;
+//    IBOutlet NSButton *drawButton;
+//    IBOutlet NSButton *relaxButton;
+//    
+//    NSMutableArray *randomPoints;
+//    float xMax;
+//    float yMax;
 }
 
 @property (assign, readwrite) float xMax;
@@ -93,8 +93,8 @@
 
 - (void)calculateVoronoi;
 
-- (IBAction)newVoronoi:(id)sender;
-- (void)newVoronoiWithNewSites:(NSMutableArray *)newSites;
+- (IBAction)createVoronoi:(id)sender;
+- (void)createVoronoiWithFreshSites:(NSMutableArray *)freshSites;
 
 @end
 

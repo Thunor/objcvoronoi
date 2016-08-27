@@ -8,8 +8,20 @@
 #import "Edge.h"
 #import "Vertex.h"
 
+@interface ClayPathMaker()
+
+@property(strong, nonatomic) NSMutableArray *solution;
+@property(strong, nonatomic) NSMutableArray *freshEdges;
+@property(strong, nonatomic) NSMutableDictionary *vertices;
+@property(strong, nonatomic) NSMutableArray *pathNodes;
+@property(nonatomic) int pathsToCalculate;
+@property(nonatomic) BOOL workingOnFirstPath;
+@property(nonatomic) BOOL workingOnLastPath;
+
+@end
+
 @implementation ClayPathMaker
-@synthesize edges, startPoint, endPoint, startVertex, endVertex, theBounds, points;
+//@synthesize edges, startPoint, endPoint, startVertex, endVertex, theBounds, points;
 
 - (id)initWithEdges:(NSMutableArray *)voronoiEdges nodesForPath:(NSMutableArray *)pointsArray andBounds:(NSRect)bbox
 {
@@ -18,15 +30,15 @@
         [self setEdges:voronoiEdges];
         [self setTheBounds:bbox];
         
-        vertices  = [[NSMutableDictionary alloc] init];
-        pathNodes = [[NSMutableArray alloc] init];
-        newEdges  = [[NSMutableArray alloc] init];
-        workingOnFirstPath = YES;
-        workingOnLastPath  = NO;
+        _vertices  = [[NSMutableDictionary alloc] init];
+        _pathNodes = [[NSMutableArray alloc] init];
+        _freshEdges  = [[NSMutableArray alloc] init];
+        _workingOnFirstPath = YES;
+        _workingOnLastPath  = NO;
         
         NSAssert([pointsArray count] > 1, @"You must have 2 or more points in the pointsArray.");
         
-        pathsToCalculate = (int)[pointsArray count] - 1;
+        _pathsToCalculate = (int)[pointsArray count] - 1;
         [self setPoints:pointsArray];
         
         [self calculate];
@@ -40,19 +52,19 @@
     
     int pathNum = 0;
     
-    if (pathsToCalculate == 1) {
-        workingOnFirstPath = YES;
-        workingOnLastPath = YES;
+    if (self.pathsToCalculate == 1) {
+        self.workingOnFirstPath = YES;
+        self.workingOnLastPath = YES;
     }
     
-    while (pathNum < pathsToCalculate) {
+    while (pathNum < self.pathsToCalculate) {
         [self setStartAndEndForPathNum:pathNum];
         [self pathByClay];
         pathNum++;
-        workingOnFirstPath = NO;
+        self.workingOnFirstPath = NO;
         
-        if (pathNum == pathsToCalculate - 1) {
-            workingOnLastPath = YES;
+        if (pathNum == self.pathsToCalculate - 1) {
+            self.workingOnLastPath = YES;
         }
         
     }
@@ -60,8 +72,8 @@
 
 - (void)setStartAndEndForPathNum:(int)pathNum
 {
-    [self setStartPoint:[[points objectAtIndex:pathNum] pointValue]];
-    [self setEndPoint:[[points objectAtIndex:pathNum + 1] pointValue]];
+    [self setStartPoint:[[self.points objectAtIndex:pathNum] pointValue]];
+    [self setEndPoint:[[self.points objectAtIndex:pathNum + 1] pointValue]];
     
     // Find the closest vertex to the start point and make it the start vertex
     float closestStartDist = INFINITY;
@@ -73,15 +85,15 @@
      Set the closest to be the start and end vertices.
      */
     
-    for (NSValue *key in [vertices allKeys]) {
-        Vertex *v = [vertices objectForKey:key];
+    for (NSValue *key in [self.vertices allKeys]) {
+        Vertex *v = [self.vertices objectForKey:key];
         
         if (![self boundingBoxSharesEdgeWithVertex:v]) {
             
             // For my purposes -- looking for a vertex that isn't on the edge of the bounding box...
             
-            float stDist = [self distanceFromPoint:startPoint toVertex:v];
-            float edDist = [self distanceFromPoint:endPoint   toVertex:v];
+            float stDist = [self distanceFromPoint:self.startPoint toVertex:v];
+            float edDist = [self distanceFromPoint:self.endPoint   toVertex:v];
             
             if (stDist < closestStartDist) {
                 closestStartDist = stDist;
@@ -95,8 +107,8 @@
         }
     }
     
-    [self setStartVertex:[vertices objectForKey:closestStartKey]];
-    [self setEndVertex:[vertices objectForKey:closestEndKey]];
+    [self setStartVertex:[self.vertices objectForKey:closestStartKey]];
+    [self setEndVertex:[self.vertices objectForKey:closestEndKey]];
 }
 
 - (void)pathByClay
@@ -104,9 +116,9 @@
     
     [[self endVertex] setTarget:YES];
     
-    for (NSValue *key in vertices) {
-        Vertex *v = [vertices objectForKey:key];
-        [v setDistance:[v distanceToVertex:endVertex]];
+    for (NSValue *key in self.vertices) {
+        Vertex *v = [self.vertices objectForKey:key];
+        [v setDistance:[v distanceToVertex:self.endVertex]];
     }
     
     [[self startVertex] setDistance:1];
@@ -115,7 +127,7 @@
     Vertex *nextVertex;
     Vertex *reserveVertex; // To be used in case we get stuck
     
-    NSMutableDictionary *unvisitedSet = [[NSMutableDictionary alloc] initWithDictionary:vertices];
+    NSMutableDictionary *unvisitedSet = [[NSMutableDictionary alloc] initWithDictionary:self.vertices];
     [unvisitedSet removeObjectForKey:[currentVertex uniqueID]];
     
     int nilLoops = 0;
@@ -187,24 +199,24 @@
         currentVertex = [currentVertex previousVertex];
     }
     
-    if (workingOnFirstPath) {
+    if (self.workingOnFirstPath) {
         Vertex *pathStart = [[Vertex alloc] initWithCoord:[self startPoint]];
         [tempPathNodes insertObject:pathStart atIndex:0];
     }
     
-    if (workingOnLastPath) {
+    if (self.workingOnLastPath) {
         Vertex *pathEnd   = [[Vertex alloc] initWithCoord:[self endPoint]];
         [tempPathNodes addObject:pathEnd];
     }
     
     // Append the vertices from this section of the path to the pathNodes array.
-    [pathNodes addObjectsFromArray:tempPathNodes];
+    [self.pathNodes addObjectsFromArray:tempPathNodes];
     
     [tempPathNodes removeAllObjects];
     
     // Reset the vertices
-    for (NSValue *key in vertices) {
-        Vertex *v = [vertices objectForKey:key];
+    for (NSValue *key in self.vertices) {
+        Vertex *v = [self.vertices objectForKey:key];
         [v setTarget:NO];
         [v setDistance:INFINITY];
         [v setPreviousVertex:nil];
@@ -223,8 +235,8 @@
     float incomingX = [v x];
     float incomingY = [v y];
     
-    for (NSValue *key in [vertices allKeys]) {
-        Vertex *existing = [vertices objectForKey:key];
+    for (NSValue *key in [self.vertices allKeys]) {
+        Vertex *existing = [self.vertices objectForKey:key];
         float existingX = [existing x];
         float existingY = [existing y];
         if ([ClayPathMaker equalWithEpsilonA:existingX andB:incomingX]) {
@@ -245,7 +257,7 @@
     // Add the edge to the vertex.
     // If it is, then just add the edge to dictionary version of the vertex
     
-    for (Edge *e in edges) {
+    for (Edge *e in self.edges) {
         // For each edge, we want to create a new edge with the appropriate 
         // vertices and store it with each vertex.
         
@@ -269,7 +281,7 @@
         
         
         // Check for existing by uniqueID
-        Vertex *existingByKey = [vertices objectForKey:[va uniqueID]];
+        Vertex *existingByKey = [self.vertices objectForKey:[va uniqueID]];
         if (!existingByKey) {
             
             // Check whether it's existing by position and return the matching existing one
@@ -280,7 +292,7 @@
                 // to the dictionary of vertices and we assign it as the va vertex for the
                 // new edge and add the new edge to its 'edges' array
                 
-                [vertices setObject:va forKey:[va uniqueID]];
+                [self.vertices setObject:va forKey:[va uniqueID]];
                 [f setVa:va];
                 [va addEdge:f];
             } else {
@@ -301,7 +313,7 @@
         
         
         // Check for existing by uniqueID
-        existingByKey = [vertices objectForKey:[vb uniqueID]];
+        existingByKey = [self.vertices objectForKey:[vb uniqueID]];
         if (!existingByKey) {
             
             // Check whether it's existing by position and return the matching existing one
@@ -312,7 +324,7 @@
                 // to the dictionary of vertices and we assign it as the vb vertex for the
                 // new edge and add the new edge to its 'edges' array
                 
-                [vertices setObject:vb forKey:[vb uniqueID]];
+                [self.vertices setObject:vb forKey:[vb uniqueID]];
                 [f setVb:vb];
                 [vb addEdge:f];
             } else {
@@ -330,14 +342,14 @@
             [existingByKey addEdge:f];
         }
         
-        // Add the new edge to the newEdges array
-        [newEdges addObject:f];
+        // Add the new edge to the freshEdges array
+        [self.freshEdges addObject:f];
 
     }
     
     // Remove vertices on the edge because I don't want to use them
-    for (NSValue *key in [vertices allKeys]) {
-        Vertex *v = [vertices objectForKey:key];
+    for (NSValue *key in [self.vertices allKeys]) {
+        Vertex *v = [self.vertices objectForKey:key];
         if ([self boundingBoxSharesEdgeWithVertex:v]) {
             [v setOnBoundingBox:YES];
         }
@@ -345,8 +357,8 @@
     
     
     // Calculate the neighbor vertices for each vertex that isn't on the edge
-    for (NSValue *key in vertices) {
-        Vertex *v = [vertices objectForKey:key];
+    for (NSValue *key in self.vertices) {
+        Vertex *v = [self.vertices objectForKey:key];
         [v calcNeighborKeys];
 
     }
@@ -355,12 +367,12 @@
 
 // Let's return an array of NSPoints as values
 // Don't forget to include the start point and end point
-- (NSMutableArray *)pathNodes
+- (NSMutableArray *)getPathNodes
 {
     // Create an array without duplicate vertices
     NSMutableArray *cleanArray = [[NSMutableArray alloc] init];
     
-    for (Vertex *v in pathNodes) {
+    for (Vertex *v in self.pathNodes) {
         if (![cleanArray containsObject:v]) {
             [cleanArray addObject:v];
         }
@@ -388,10 +400,10 @@
 
 - (BOOL)boundingBoxSharesEdgeWithVertex:(Vertex *)dv
 {
-    float boundsMinX = theBounds.origin.x;
-    float boundsMaxX = theBounds.origin.x + theBounds.size.width;
-    float boundsMinY = theBounds.origin.y;
-    float boundsMaxY = theBounds.origin.y + theBounds.size.height;
+    float boundsMinX = self.theBounds.origin.x;
+    float boundsMaxX = self.theBounds.origin.x + self.theBounds.size.width;
+    float boundsMinY = self.theBounds.origin.y;
+    float boundsMaxY = self.theBounds.origin.y + self.theBounds.size.height;
     
     float dvx = [dv x];
     float dvy = [dv y];
@@ -428,6 +440,6 @@
 
 - (NSMutableArray *)solution
 {
-    return solution;
+    return self.solution;
 }
 @end

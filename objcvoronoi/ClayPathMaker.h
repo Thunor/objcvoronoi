@@ -9,26 +9,7 @@
 @class Edge;
 @class Vertex;
 
-@interface ClayPathMaker : NSObject {
-    NSMutableArray *solution;
-    NSMutableArray *edges;
-    NSMutableArray *newEdges;
-    NSPoint startPoint;
-    NSPoint endPoint;
-    Vertex *startVertex;
-    Vertex *endVertex;
-    NSRect theBounds;
-    NSMutableDictionary *vertices;
-    
-    NSMutableArray *pathNodes;
-    
-    NSMutableArray *points;
-    
-    int pathsToCalculate;
-    
-    BOOL workingOnFirstPath;
-    BOOL workingOnLastPath;
-}
+@interface ClayPathMaker : NSObject
 
 @property (copy, readwrite) NSMutableArray *edges;
 @property (retain, readwrite) NSMutableArray *points;
@@ -48,7 +29,7 @@
 - (void)prepareData;
 - (void)setStartAndEndForPathNum:(int)pathNum;
 - (void)pathByClay;
-- (NSMutableArray *)pathNodes;
+- (NSMutableArray *)getPathNodes;
 - (Vertex *)vertexMatchingByPosition:(Vertex *)v;
 
 @end

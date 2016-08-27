@@ -13,16 +13,16 @@
 @class Halfedge;
 @class Vertex;
 
-@interface ClayRelaxer : NSObject {
-    NSMutableArray *cells;
-    NSMutableArray *newSites;
-}
+@interface ClayRelaxer : NSObject
+
+
+@property(strong, nonatomic) NSMutableArray *freshSites;
 
 // Call this to use the relaxer.
 + (NSMutableArray *)relaxSitesInCells:(NSMutableArray *)cellArray;
 
 - (id)initWithCells:(NSMutableArray *)cellArray;
 - (void)processCells;
-- (NSMutableArray *)newSites;
+//- (NSMutableArray *)Sites;
 
 @end
