@@ -6,6 +6,5 @@
 #import "VoronoiResult.h"
 
 @implementation VoronoiResult
-@synthesize cells, edges;
 
 @end

@@ -9,11 +9,7 @@
 @class Edge;
 @class Vertex;
 
-@interface Halfedge : NSObject {
-    Site *site;
-    Edge *edge;
-    float angle;
-}
+@interface Halfedge : NSObject
 
 @property (retain, readwrite) Site *site;
 @property (retain, readwrite) Edge *edge;

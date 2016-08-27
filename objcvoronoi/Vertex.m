@@ -8,21 +8,27 @@
 
 static int identifier = 0;
 
+@interface Vertex()
+
+@property(nonatomic) int UUID;
+@property(strong, nonatomic) NSMutableArray *edges;
+
+@end
+
 @implementation Vertex
-@synthesize visited, target, distance, onBoundingBox, previousVertex;
 
 - (id)initWithCoord:(NSPoint)tempCoord
 {
     self = [super initWithCoord:tempCoord];
     if (self) {
-        uniqueID = identifier;
+        _UUID = identifier;
         identifier++;
-        [self setVisited:NO];
-        [self setTarget:NO];
-        [self setOnBoundingBox:NO];
-        [self setDistance:INFINITY];
-        edges = [[NSMutableArray alloc] init];
-        neighborKeys = [[NSMutableArray alloc] init];
+        _visited = NO;
+        _target = NO;
+        _onBoundingBox = NO;
+        _distance = INFINITY;
+        _edges = [[NSMutableArray alloc] init];
+        _neighborKeys = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -31,12 +37,12 @@ static int identifier = 0;
 {
     self = [super initWithValue:valueWithCoord];
     if (self) {
-        uniqueID = identifier;
+        _UUID = identifier;
         identifier++;
         [self setVisited:NO];
         [self setTarget:NO];
         [self setDistance:INFINITY];
-        edges = [[NSMutableArray alloc] init];
+        self.edges = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -48,12 +54,12 @@ static int identifier = 0;
 
 - (NSString *)uniqueID
 {
-    return [NSString stringWithFormat:@"%i", uniqueID];
+    return [NSString stringWithFormat:@"%i", self.UUID];
 }
 
 - (int)uniqueIDAsInt
 {
-    return uniqueID;
+    return self.UUID;
 }
 
 - (float)distanceToVertex:(Vertex *)v
@@ -77,8 +83,8 @@ static int identifier = 0;
 
 - (void)addEdge:(Edge *)e
 {
-    if (![edges containsObject:e]) {
-        [edges addObject:e];
+    if (![self.edges containsObject:e]) {
+        [self.edges addObject:e];
     }
 }
 
@@ -88,7 +94,7 @@ static int identifier = 0;
     // We have to figure out which vertex it is on each edge and then store the
     // uniqueID of the other vertex in 
     
-    for (Edge *e in edges) {
+    for (Edge *e in self.edges) {
         Vertex *otherVertex;
         if (self == [e va]) {
             otherVertex = [e vb];
@@ -96,13 +102,8 @@ static int identifier = 0;
             otherVertex = [e va];
         }
         NSAssert(otherVertex != nil, @"Vertex: neighborKeys -- otherVertex is nil");
-        [neighborKeys addObject:[otherVertex uniqueID]];
+        [self.neighborKeys addObject:[otherVertex uniqueID]];
     }
-}
-
-- (NSMutableArray *)neighborKeys
-{
-    return neighborKeys;
 }
 
 @end

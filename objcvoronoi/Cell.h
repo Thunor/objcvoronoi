@@ -8,16 +8,13 @@
 @class Site;
 @class Halfedge;
 
-@interface Cell : NSObject {
-    Site *site;
-    NSMutableArray *halfedges;
-}
+@interface Cell : NSObject
 
 @property (retain, readwrite) Site *site;
+@property (strong, nonatomic, readwrite) NSMutableArray *halfedges;
 
 - (id)initWithSite:(Site *)s;
 - (int)prepare;
 - (void)addHalfedgeToArray:(Halfedge *)he;
-- (NSMutableArray *)halfedges;
 
 @end

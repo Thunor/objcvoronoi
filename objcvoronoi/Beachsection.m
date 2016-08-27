@@ -9,7 +9,6 @@
 #import "CircleEvent.h"
 
 @implementation Beachsection
-@synthesize rbNext, rbPrevious, rbParent, rbRight, rbLeft, rbRed, site, edge, circleEvent;
 
 - (id)initWithSite:(Site *)theSite
 {

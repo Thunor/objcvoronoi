@@ -32,10 +32,8 @@ float const VORONOI_EPSILON = 0.00005;
 @end
 
 @implementation Voronoi
-//@synthesize firstCircleEvent, boundingBox;
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
         _sites = [[NSMutableArray alloc] init];
@@ -43,13 +41,11 @@ float const VORONOI_EPSILON = 0.00005;
         _cells = [[NSMutableArray alloc] init];
         _beachsectionJunkyard = [[NSMutableArray alloc] init];
         _circleEventJunkyard  = [[NSMutableArray alloc] init];
-        
     }
     return self;
 }
 
-- (VoronoiResult *)computeWithSites:(NSMutableArray *)siteList andBoundingBox:(NSRect)bbox
-{
+- (VoronoiResult *)computeWithSites:(NSMutableArray *)siteList andBoundingBox:(NSRect)bbox {
     /////////////////////////////////////////////////////////////////////////////
     // siteList comes in as an array of NSPoints stored as NSValues.           //
     // Convert them to Site class and then make sites an array of Site objects //
@@ -141,8 +137,7 @@ float const VORONOI_EPSILON = 0.00005;
     return result;
 }
 
-- (void)reset
-{
+- (void)reset {
     if (!self.beachline) {
         self.beachline = [[RBTree alloc] init];
     }
@@ -170,13 +165,11 @@ float const VORONOI_EPSILON = 0.00005;
 // Probably unnecessary but created to have parity with the javascript version
 // Could just call to Beachsection directly...
 
-- (Beachsection *)createBeachsection:(Site *)site
-{
+- (Beachsection *)createBeachsection:(Site *)site {
     return [Beachsection createBeachSectionFromJunkyard:self.beachsectionJunkyard withSite:site];
 }
 
-- (void)addBeachsection:(Site *)site
-{
+- (void)addBeachsection:(Site *)site {
     float x = site.x;
     float directrix = site.y;
     
@@ -359,8 +352,7 @@ float const VORONOI_EPSILON = 0.00005;
     }
 }
 
-- (void)removeBeachsection:(Beachsection *)bs
-{
+- (void)removeBeachsection:(Beachsection *)bs {
     CircleEvent *circle = [bs circleEvent];
     float x = [circle x];
     float y = [circle ycenter];
@@ -441,8 +433,7 @@ float const VORONOI_EPSILON = 0.00005;
     [self attachCircleEvent:rArc];
 }
 
-- (void)detachBeachsection:(Beachsection *)bs
-{
+- (void)detachBeachsection:(Beachsection *)bs {
     // Detach potentially attached circle event
     [self detachCircleEvent:bs];
     [self.beachline rbRemoveNode:bs];
@@ -451,8 +442,7 @@ float const VORONOI_EPSILON = 0.00005;
 }
 
 - (float)rightBreakPointWithArc:(Beachsection *)arc 
-                   andDirectrix:(float)directrix
-{
+                   andDirectrix:(float)directrix {
     Beachsection *rArc = [arc rbNext];
     if (rArc) {
         return [self leftBreakPointWithArc:rArc andDirectrix:directrix];
@@ -463,8 +453,7 @@ float const VORONOI_EPSILON = 0.00005;
 
 // Calculate the left break point of a particular beach section, given a particular sweep line
 - (float)leftBreakPointWithArc:(Beachsection *)arc 
-                  andDirectrix:(float)directrix
-{
+                  andDirectrix:(float)directrix {
     // http://en.wikipedia.org/wiki/Parabola
 	// http://en.wikipedia.org/wiki/Quadratic_equation
 	// h1 = x1,
@@ -539,8 +528,7 @@ float const VORONOI_EPSILON = 0.00005;
 - (void)setEdgeStartPointWithEdge:(Edge *)tempEdge 
                             lSite:(Site *)tempLSite 
                             rSite:(Site *)tempRSite 
-                        andVertex:(Vertex *)tempVertex
-{
+                        andVertex:(Vertex *)tempVertex {
     if (![tempEdge va] && ![tempEdge vb]) {
         [tempEdge setVa:tempVertex];
         [tempEdge setLSite:tempLSite];
@@ -555,13 +543,11 @@ float const VORONOI_EPSILON = 0.00005;
 - (void)setEdgeEndPointWithEdge:(Edge *)tempEdge 
                           lSite:(Site *)tempLSite 
                           rSite:(Site *)tempRSite 
-                      andVertex:(Vertex *)tempVertex
-{
+                      andVertex:(Vertex *)tempVertex {
     [self setEdgeStartPointWithEdge:tempEdge lSite:tempRSite rSite:tempLSite andVertex:tempVertex];
 }
 
-- (void)attachCircleEvent:(Beachsection *)arc
-{
+- (void)attachCircleEvent:(Beachsection *)arc {
     Beachsection *lArc = [arc rbPrevious];
     Beachsection *rArc = [arc rbNext];
     
@@ -659,8 +645,7 @@ float const VORONOI_EPSILON = 0.00005;
     }
 }
 
-- (void)detachCircleEvent:(Beachsection *)arc
-{
+- (void)detachCircleEvent:(Beachsection *)arc {
     CircleEvent *circle = [arc circleEvent];
     if (circle) {
         if (![circle rbPrevious]) {
@@ -672,13 +657,11 @@ float const VORONOI_EPSILON = 0.00005;
     }
 }
 
-- (Edge *)edgeWithSite:(Site *)lSite andSite:(Site *)rSite
-{
+- (Edge *)edgeWithSite:(Site *)lSite andSite:(Site *)rSite {
     return [[Edge alloc] initWithLSite:lSite andRSite:rSite];
 }
 
-- (Edge *)createEdgeWithSite:(Site *)lSite andSite:(Site *)rSite andVertex:(Vertex *)va andVertex:(Vertex *)vb
-{
+- (Edge *)createEdgeWithSite:(Site *)lSite andSite:(Site *)rSite andVertex:(Vertex *)va andVertex:(Vertex *)vb {
     // This creates and adds an edge to the internal collection, and also creates
     // two halfedges which are added to each site's counterclockwise array
     // of halfedges
@@ -704,8 +687,7 @@ float const VORONOI_EPSILON = 0.00005;
     
 }
 
-- (Edge *)createBorderEdgeWithSite:(Site *)lSite andVertex:(Vertex *)va andVertex:(Vertex *)vb
-{
+- (Edge *)createBorderEdgeWithSite:(Site *)lSite andVertex:(Vertex *)va andVertex:(Vertex *)vb {
     
     Edge *edge = [self edgeWithSite:lSite andSite:nil];
     [edge setVa:va];
@@ -716,8 +698,7 @@ float const VORONOI_EPSILON = 0.00005;
 }
 
 #pragma mark Diagram completion methods
-- (BOOL)connectEdge:(Edge *)edge withBoundingBox:(NSRect)bbox
-{
+- (BOOL)connectEdge:(Edge *)edge withBoundingBox:(NSRect)bbox {
     // Skip if end point already connected
     Vertex *vb = [edge vb];
     if (!!vb) {
@@ -832,8 +813,7 @@ float const VORONOI_EPSILON = 0.00005;
     return YES;
 }
 
-- (BOOL)clipEdge:(Edge *)edge withBoundingBox:(NSRect)bbox
-{
+- (BOOL)clipEdge:(Edge *)edge withBoundingBox:(NSRect)bbox {
     // line-clipping code taken from:
     //  Liang-Barsky function by Daniel White
     //  http://www.skytopia.com/project/articles/compsci/clipping.html
@@ -956,8 +936,7 @@ float const VORONOI_EPSILON = 0.00005;
 }
 
 // Clip/cut edges at the bounding box
-- (void)clipEdges:(NSRect)bbox
-{
+- (void)clipEdges:(NSRect)bbox {
     int iEdge = (int)[self.edges count];
     Edge *edge;
     
@@ -981,8 +960,7 @@ float const VORONOI_EPSILON = 0.00005;
 // Close the cells.
 // The cells are bound by the supplied bounding box.
 // Each cell refers to its associated site, and a list of halfedges ordered counterclockwise
-- (void)closeCells:(NSRect)bbox
-{
+- (void)closeCells:(NSRect)bbox {
     float xl = bbox.origin.x;
     float xr = bbox.origin.x + bbox.size.width;
     float yt = bbox.origin.y;
@@ -1072,28 +1050,23 @@ float const VORONOI_EPSILON = 0.00005;
 }
 
 #pragma mark Math
-+ (BOOL)equalWithEpsilonA:(float)a andB:(float)b
-{
++ (BOOL)equalWithEpsilonA:(float)a andB:(float)b {
     return fabsf(a - b) < VORONOI_EPSILON;
 }
 
-+ (BOOL)greaterThanWithEpsilonA:(float)a andB:(float)b
-{
++ (BOOL)greaterThanWithEpsilonA:(float)a andB:(float)b {
     return a-b > VORONOI_EPSILON;
 }
 
-+ (BOOL)greaterThanOrEqualWithEpsilonA:(float)a andB:(float)b
-{
++ (BOOL)greaterThanOrEqualWithEpsilonA:(float)a andB:(float)b {
     return b-a < VORONOI_EPSILON;
 }
 
-+ (BOOL)lessThanWithEpsilonA:(float)a andB:(float)b
-{
++ (BOOL)lessThanWithEpsilonA:(float)a andB:(float)b {
     return b-a > VORONOI_EPSILON;
 }
 
-+ (BOOL)lessThanOrEqualWithEpsilonA:(float)a andB:(float)b
-{
++ (BOOL)lessThanOrEqualWithEpsilonA:(float)a andB:(float)b {
     return a-b < VORONOI_EPSILON;
 }
 @end

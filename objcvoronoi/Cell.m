@@ -8,12 +8,16 @@
 #import "Halfedge.h"
 #import "Edge.h"
 
+@interface Cell()
+
+@end
+
 @implementation Cell
 @synthesize site;
 
 - (NSString *)description
 {
-    NSString *d = [NSString stringWithFormat:@"Cell | site: %@, halfedges: %@", site, halfedges];
+    NSString *d = [NSString stringWithFormat:@"Cell | site: %@, halfedges: %@", site, self.halfedges];
     return d;
 }
 
@@ -22,37 +26,32 @@
     self = [super init];
     if (self) {
         [self setSite:s];
-        halfedges = [[NSMutableArray alloc] init];
+        self.halfedges = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (int)prepare
 {
-    int iHalfedge = (int)[halfedges count];
+    int iHalfedge = (int)[self.halfedges count];
     Edge *thisEdge;
     // get rid of unused halfedges
     while (iHalfedge--) {
-        Halfedge *he = [halfedges objectAtIndex:iHalfedge];
+        Halfedge *he = [self.halfedges objectAtIndex:iHalfedge];
         thisEdge = [he edge];
         if (![thisEdge vb] || ![thisEdge va]) {
-            [halfedges removeObjectAtIndex:iHalfedge]; // Double-check this in production vs. js
+            [self.halfedges removeObjectAtIndex:iHalfedge]; // Double-check this in production vs. js
             // halfedges.splice(iHalfedge,1);
         }
     }
-    [Halfedge sortArrayOfHalfedges:halfedges];          // Possible problem point...
+    [Halfedge sortArrayOfHalfedges:self.halfedges];          // Possible problem point...
     
-    return (int)[halfedges count];
+    return (int)[self.halfedges count];
 }
 
 - (void)addHalfedgeToArray:(Halfedge *)he
 {
-    [halfedges addObject:he];
-}
-
-- (NSMutableArray *)halfedges
-{
-    return halfedges;
+    [self.halfedges addObject:he];
 }
 
 @end

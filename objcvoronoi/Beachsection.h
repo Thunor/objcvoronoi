@@ -9,18 +9,7 @@
 @class Edge;
 @class CircleEvent;
 
-@interface Beachsection : NSObject {
-    Beachsection *rbNext;
-    Beachsection *rbPrevious;
-    Beachsection *rbParent;
-    Beachsection *rbRight;
-    Beachsection *rbLeft;
-    BOOL rbRed;
-    
-    Site * site;
-    Edge *edge;
-    CircleEvent *circleEvent;
-}
+@interface Beachsection : NSObject
 
 @property (retain, readwrite)Beachsection *rbNext;
 @property (retain, readwrite)Beachsection *rbPrevious;

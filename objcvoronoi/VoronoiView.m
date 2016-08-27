@@ -11,10 +11,8 @@
 #import "Vertex.h"
 
 @implementation VoronoiView
-@synthesize sites, cells ; //, dijkstraPathPoints;
 
-- (id)initWithFrame:(NSRect)frame
-{
+- (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
@@ -32,14 +30,12 @@
  
 */
 
-- (void)drawRect:(NSRect)dirtyRect
-{
+- (void)drawRect:(NSRect)dirtyRect {
     [NSGraphicsContext saveGraphicsState];
     
     // Fill the background white
-    [[NSColor whiteColor]set];
+    [[NSColor whiteColor] set];
     [NSBezierPath fillRect:[self bounds]];
-    
     
     [[NSColor redColor] set];
     

@@ -5,10 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VoronoiResult : NSObject {
-    NSMutableArray *cells;
-    NSMutableArray *edges;
-}
+@interface VoronoiResult : NSObject
 
 @property (retain, readwrite) NSMutableArray *cells;
 @property (retain, readwrite) NSMutableArray *edges;

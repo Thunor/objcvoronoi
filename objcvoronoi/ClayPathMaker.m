@@ -21,7 +21,6 @@
 @end
 
 @implementation ClayPathMaker
-//@synthesize edges, startPoint, endPoint, startVertex, endVertex, theBounds, points;
 
 - (id)initWithEdges:(NSMutableArray *)voronoiEdges nodesForPath:(NSMutableArray *)pointsArray andBounds:(NSRect)bbox
 {

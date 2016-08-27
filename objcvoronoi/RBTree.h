@@ -5,9 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RBTree : NSObject {
-    id root;
-}
+@interface RBTree : NSObject
 
 @property (retain, readwrite) id root;
 

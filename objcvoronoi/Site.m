@@ -6,11 +6,10 @@
 #import "Site.h"
 
 @implementation Site
-@synthesize voronoiId;
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"(coord: %@, voronoiId: %i)", NSStringFromPoint(coord), voronoiId];
+    return [NSString stringWithFormat:@"(coord: %@, voronoiId: %i)", NSStringFromPoint(self.coord), self.voronoiId];
 }
 
 - (id)initWithCoord:(NSPoint)tempCoord
@@ -36,44 +35,34 @@
     return [self initWithCoord:NSZeroPoint];
 }
 
-- (void)setCoord:(NSPoint)tempCoord
-{
-    coord = tempCoord;
-}
-
-- (NSPoint)coord
-{
-    return coord;
-}
-
 - (void)setCoordAsValue:(NSValue *)valueWithCoord
 {
-    coord = [valueWithCoord pointValue];
+    self.coord = [valueWithCoord pointValue];
 }
 
 - (NSValue *)coordAsValue
 {
-    return [NSValue valueWithPoint:coord];
+    return [NSValue valueWithPoint:self.coord];
 }
 
 - (void)setX:(float)tempX
 {
-    [self setCoord:NSMakePoint(tempX, coord.y)];
+    [self setCoord:NSMakePoint(tempX, self.coord.y)];
 }
 
 - (float)x
 {
-    return coord.x;
+    return self.coord.x;
 }
 
 - (void)setY:(float)tempY
 {
-    [self setCoord:NSMakePoint(coord.x, tempY)];
+    [self setCoord:NSMakePoint(self.coord.x, tempY)];
 }
 
 - (float)y
 {
-    return coord.y;
+    return self.coord.y;
 }
 
 + (void)sortSites:(NSMutableArray *)siteArray

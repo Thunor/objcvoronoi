@@ -5,18 +5,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Site : NSObject {
-    NSPoint coord;
-    int voronoiId;
-}
+@interface Site : NSObject
 
 @property (assign, readwrite) int voronoiId;
+@property (readwrite, nonatomic) NSPoint coord;
 
 - (id)initWithCoord:(NSPoint)tempCoord;
 - (id)initWithValue:(NSValue *)valueWithCoord;
-
-- (void)setCoord:(NSPoint)tempCoord;
-- (NSPoint)coord;
 
 - (void)setCoordAsValue:(NSValue *)valueWithCoord;
 - (NSValue *)coordAsValue;

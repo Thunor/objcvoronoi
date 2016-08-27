@@ -9,12 +9,7 @@
 @class Vertex;
 @class Halfedge;
 
-@interface Edge : NSObject {
-    Site *lSite;
-    Site *rSite;
-    Vertex *va;
-    Vertex *vb;
-}
+@interface Edge : NSObject
 
 @property (retain, readwrite) Site *lSite;
 @property (retain, readwrite) Site *rSite;

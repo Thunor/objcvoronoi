@@ -8,48 +8,35 @@
 #import "Site.h"
 
 @implementation CircleEvent
-@synthesize rbNext, rbPrevious, rbParent, rbRight, rbLeft, rbRed, arc, site, ycenter;
-
-
-
-- (void)setCoord:(NSPoint)tempCoord
-{
-    coord = tempCoord;
-}
-
-- (NSPoint)coord
-{
-    return coord;
-}
 
 - (void)setCoordAsValue:(NSValue *)valueWithCoord
 {
-    coord = [valueWithCoord pointValue];
+    self.coord = [valueWithCoord pointValue];
 }
 
 - (NSValue *)coordAsValue
 {
-    return [NSValue valueWithPoint:coord];
+    return [NSValue valueWithPoint:self.coord];
 }
 
 - (void)setX:(float)tempX
 {
-    [self setCoord:NSMakePoint(tempX, coord.y)];
+    [self setCoord:NSMakePoint(tempX, self.coord.y)];
 }
 
 - (float)x
 {
-    return coord.x;
+    return self.coord.x;
 }
 
 - (void)setY:(float)tempY
 {
-    [self setCoord:NSMakePoint(coord.x, tempY)];
+    [self setCoord:NSMakePoint(self.coord.x, tempY)];
 }
 
 - (float)y
 {
-    return coord.y;
+    return self.coord.y;
 }
 
 @end

@@ -28,24 +28,21 @@
 
 
 @implementation VoronoiController
-@synthesize xMax, yMax;
-- (id)init
-{
+
+- (id)init {
     self = [super init];
     if (self) {
-        self.randomPoints = [[NSMutableArray alloc] init];
+        _randomPoints = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (IBAction)relaxWithLloyd:(id)sender
-{
+- (IBAction)relaxWithLloyd:(id)sender {
     NSMutableArray *freshSites = [ClayRelaxer relaxSitesInCells:[self.activeResult cells]];
     [self createVoronoiWithFreshSites:freshSites];
 }
 
-- (IBAction)createVoronoi:(id)sender
-{
+- (IBAction)createVoronoi:(id)sender {
     [self.randomPoints removeAllObjects];
     self.activeResult = nil;
     
@@ -54,12 +51,12 @@
     
     // Send in sites as NSPoints that have been converted to NSValue
     
-    xMax = [self.voronoiview bounds].size.width;
-    yMax = [self.voronoiview bounds].size.height;
+    self.xMax = [self.voronoiview bounds].size.width;
+    self.yMax = [self.voronoiview bounds].size.height;
     
     for (int i = 0; i < numSites; i++) {
-        float x = margin + (arc4random() % ((int)xMax - margin*2));
-        float y = margin + (arc4random() % ((int)yMax - margin*2));
+        float x = margin + (arc4random() % ((int)self.xMax - margin*2));
+        float y = margin + (arc4random() % ((int)self.yMax - margin*2));
         NSValue *v = [NSValue valueWithPoint:NSMakePoint(x, y)];
         [self.randomPoints addObject:v];
     }
@@ -67,8 +64,7 @@
     [self calculateVoronoi];
 }
 
-- (void)createVoronoiWithFreshSites:(NSMutableArray *)freshSites
-{
+- (void)createVoronoiWithFreshSites:(NSMutableArray *)freshSites {
     // Clear the old
     [self.randomPoints removeAllObjects];
     self.randomPoints = nil;
@@ -81,8 +77,7 @@
     [self calculateVoronoi];
 }
 
-- (void)calculateVoronoi
-{
+- (void)calculateVoronoi {
     
     self.voronoi = [[Voronoi alloc] init];
     self.activeResult = [self.voronoi computeWithSites:self.randomPoints andBoundingBox:[self.voronoiview bounds]];
@@ -99,10 +94,10 @@
     
     if ([self.randomPoints count] > 4) {
         
-        NSValue *start = [NSValue valueWithPoint:NSMakePoint(0, yMax * 0.5)];
-        NSValue *end   = [NSValue valueWithPoint:NSMakePoint(xMax, yMax * 0.5)];
-        NSValue *midPoint = [NSValue valueWithPoint:NSMakePoint(xMax * 0.33, 0)];
-        NSValue *midPoint2 = [NSValue valueWithPoint:NSMakePoint(xMax * 0.66, yMax)];
+        NSValue *start = [NSValue valueWithPoint:NSMakePoint(0, self.yMax * 0.5)];
+        NSValue *end   = [NSValue valueWithPoint:NSMakePoint(self.xMax, self.yMax * 0.5)];
+        NSValue *midPoint = [NSValue valueWithPoint:NSMakePoint(self.xMax * 0.33, 0)];
+        NSValue *midPoint2 = [NSValue valueWithPoint:NSMakePoint(self.xMax * 0.66, self.yMax)];
         
         NSMutableArray *pathNodes = [[NSMutableArray alloc] init];
         [pathNodes addObject:start];

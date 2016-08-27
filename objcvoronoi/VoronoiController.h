@@ -72,27 +72,13 @@
 @class VoronoiResult;
 @class VoronoiView;
 
-@interface VoronoiController : NSObject {
-//    Voronoi *voronoi;
-//    VoronoiResult *activeResult;
-//    IBOutlet VoronoiView *voronoiview;
-//    IBOutlet NSTextField *numSitesEntry;
-//    IBOutlet NSTextField *marginEntry;
-//    IBOutlet NSButton *drawButton;
-//    IBOutlet NSButton *relaxButton;
-//    
-//    NSMutableArray *randomPoints;
-//    float xMax;
-//    float yMax;
-}
+@interface VoronoiController : NSObject
 
 @property (assign, readwrite) float xMax;
 @property (assign, readwrite) float yMax;
 
 - (IBAction)relaxWithLloyd:(id)sender;
-
 - (void)calculateVoronoi;
-
 - (IBAction)createVoronoi:(id)sender;
 - (void)createVoronoiWithFreshSites:(NSMutableArray *)freshSites;
 

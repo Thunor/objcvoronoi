@@ -9,7 +9,6 @@
 #import "Halfedge.h"
 
 @implementation Edge
-@synthesize lSite, rSite, va, vb;
 
 - (id)initWithLSite:(Site *)theLSite andRSite:(Site *)theRSite
 {
@@ -25,7 +24,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ - %@ | va: %@, vb: %@",[va uniqueID], [vb uniqueID], va, vb];
+    return [NSString stringWithFormat:@"%@ - %@ | va: %@, vb: %@",[self.va uniqueID], [self.vb uniqueID], self.va, self.vb];
 }
 
 @end

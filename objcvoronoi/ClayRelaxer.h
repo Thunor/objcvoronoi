@@ -23,6 +23,5 @@
 
 - (id)initWithCells:(NSMutableArray *)cellArray;
 - (void)processCells;
-//- (NSMutableArray *)Sites;
 
 @end

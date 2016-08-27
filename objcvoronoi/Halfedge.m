@@ -9,7 +9,6 @@
 #import "Vertex.h"
 
 @implementation Halfedge
-@synthesize site, edge, angle;
 
 - (id)initWithEdge:(Edge *)theEdge lSite:(Site *)theLSite andRSite:(Site *)theRSite
 {
@@ -46,7 +45,7 @@
     NSString *endPoint   = [[self getEndpoint] description];
     
     
-    return [NSString stringWithFormat:@"Halfedge - Angle: %f,  Start Point: %@,  End Point: %@",angle, startPoint, endPoint];
+    return [NSString stringWithFormat:@"Halfedge - Angle: %f,  Start Point: %@,  End Point: %@",self.angle, startPoint, endPoint];
 }
 
 - (Vertex *)getStartpoint

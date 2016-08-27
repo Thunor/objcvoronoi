@@ -7,8 +7,8 @@
 #import "Beachsection.h"
 #import "CircleEvent.h"
 
+
 @implementation RBTree
-@synthesize root;
 
 - (id)init
 {
