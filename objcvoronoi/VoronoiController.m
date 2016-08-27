@@ -21,6 +21,8 @@
 @property(weak, nonatomic) IBOutlet NSTextField *marginEntry;
 @property(weak, nonatomic) IBOutlet NSButton *drawButton;
 @property(weak, nonatomic) IBOutlet NSButton *relaxButton;
+@property (weak) IBOutlet NSButton *drawPointsBtn;
+@property (weak) IBOutlet NSButton *drawCellsBtn;
 
 @property(strong, nonatomic) NSMutableArray *randomPoints;
 
@@ -79,6 +81,7 @@
 
 - (void)calculateVoronoi {
     
+    NSLog(@"____ start voronoi");
     self.voronoi = [[Voronoi alloc] init];
     self.activeResult = [self.voronoi computeWithSites:self.randomPoints andBoundingBox:[self.voronoiview bounds]];
     
@@ -92,26 +95,36 @@
     [self.voronoiview setSites:sitesFromCells];
     [self.voronoiview setCells:[self.activeResult cells]];
     
-    if ([self.randomPoints count] > 4) {
-        
-        NSValue *start = [NSValue valueWithPoint:NSMakePoint(0, self.yMax * 0.5)];
-        NSValue *end   = [NSValue valueWithPoint:NSMakePoint(self.xMax, self.yMax * 0.5)];
-        NSValue *midPoint = [NSValue valueWithPoint:NSMakePoint(self.xMax * 0.33, 0)];
-        NSValue *midPoint2 = [NSValue valueWithPoint:NSMakePoint(self.xMax * 0.66, self.yMax)];
-        
-        NSMutableArray *pathNodes = [[NSMutableArray alloc] init];
-        [pathNodes addObject:start];
-        [pathNodes addObject:midPoint];
-        [pathNodes addObject:midPoint2];
-        [pathNodes addObject:end];
-        
-        ClayPathMaker *dij = [[ClayPathMaker alloc] initWithEdges:[self.activeResult edges]
-                                                       nodesForPath:pathNodes
-                                                          andBounds:[self.voronoiview bounds]];
-        [self.voronoiview setDijkstraPathPoints:[dij getPathNodes]];
-    } else {
-        [self.voronoiview setDijkstraPathPoints:nil];
-    }
+    NSLog(@"____ end voronoi");
+    
+    // TODO: This should be a selectable option.  It is really, really slow.
+    
+//    NSLog(@"____ start clay path maker");
+//    if ([self.randomPoints count] > 4) {
+//        
+//        NSValue *start = [NSValue valueWithPoint:NSMakePoint(0, self.yMax * 0.5)];
+//        NSValue *end   = [NSValue valueWithPoint:NSMakePoint(self.xMax, self.yMax * 0.5)];
+//        NSValue *midPoint = [NSValue valueWithPoint:NSMakePoint(self.xMax * 0.33, 0)];
+//        NSValue *midPoint2 = [NSValue valueWithPoint:NSMakePoint(self.xMax * 0.66, self.yMax)];
+//        
+//        NSMutableArray *pathNodes = [[NSMutableArray alloc] init];
+//        [pathNodes addObject:start];
+//        [pathNodes addObject:midPoint];
+//        [pathNodes addObject:midPoint2];
+//        [pathNodes addObject:end];
+//        
+//        ClayPathMaker *dij = [[ClayPathMaker alloc] initWithEdges:[self.activeResult edges]
+//                                                       nodesForPath:pathNodes
+//                                                          andBounds:[self.voronoiview bounds]];
+//        [self.voronoiview setDijkstraPathPoints:[dij getPathNodes]];
+//    } else {
+//        [self.voronoiview setDijkstraPathPoints:nil];
+//    }
+//    
+//    NSLog(@"____ end clay path maker");
+    
+    self.voronoiview.drawCells = self.drawCellsBtn.state == 1;
+    self.voronoiview.drawPoints = self.drawPointsBtn.state == 1;
     
     [self.voronoiview setNeedsDisplay:YES];
 

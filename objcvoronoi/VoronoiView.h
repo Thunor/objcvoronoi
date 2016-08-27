@@ -12,4 +12,7 @@
 @property (retain, readwrite) NSMutableArray *cells;
 @property (retain, readwrite) NSMutableArray *dijkstraPathPoints;
 
+@property (nonatomic, readwrite) BOOL drawPoints;
+@property (nonatomic, readwrite) BOOL drawCells;
+
 @end

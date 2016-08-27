@@ -47,6 +47,7 @@
 
 - (void)calculate
 {
+    NSLog(@"____ start");
     [self prepareData];
     
     int pathNum = 0;
@@ -67,6 +68,7 @@
         }
         
     }
+    NSLog(@"____ end");
 }
 
 - (void)setStartAndEndForPathNum:(int)pathNum
@@ -169,20 +171,26 @@
             [nextVertex setPreviousVertex:[reserveVertex previousVertex]];
             
             // We know the current vertex won't work for pathfinding
-            [unvisitedSet removeObjectForKey:[currentVertex uniqueID]];
+            if (currentVertex.uniqueID) {
+                [unvisitedSet removeObjectForKey:[currentVertex uniqueID]];
+            }
         }
         
         if (nilLoops > 3) {
             nilLoops = 0;
             // We're stuck.
             nextVertex = [reserveVertex previousVertex];
-            [unvisitedSet removeObjectForKey:[reserveVertex uniqueID]];
+            if (reserveVertex.uniqueID) {
+                [unvisitedSet removeObjectForKey:[reserveVertex uniqueID]];
+            }
             reserveVertex = nextVertex;
         }
         
         // We've iterated through all neighbors
         currentVertex = nextVertex;
-        [unvisitedSet removeObjectForKey:[currentVertex uniqueID]];
+        if (currentVertex.uniqueID) {
+            [unvisitedSet removeObjectForKey:[currentVertex uniqueID]];
+        }
     }
     
     // Now iterate through them backwards to build the path
@@ -238,6 +246,9 @@
         Vertex *existing = [self.vertices objectForKey:key];
         float existingX = [existing x];
         float existingY = [existing y];
+        
+        
+        
         if ([ClayPathMaker equalWithEpsilonA:existingX andB:incomingX]) {
             if ([ClayPathMaker equalWithEpsilonA:existingY andB:incomingY]) {
                 return existing;

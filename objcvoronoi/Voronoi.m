@@ -84,7 +84,7 @@ float const VORONOI_EPSILON = 0.00005;
         // 'earlier' than the circle event                                //
         ////////////////////////////////////////////////////////////////////
         
-        circle = [self firstCircleEvent];
+        circle = self.firstCircleEvent;
         // Add Beach Section
         
         if (site && (!circle || site.y < circle.y || (site.y == circle.y && site.x < circle.x))) {

@@ -37,41 +37,45 @@
     [[NSColor whiteColor] set];
     [NSBezierPath fillRect:[self bounds]];
     
-    [[NSColor redColor] set];
-    
-    for (NSValue *v in self.sites) {
-        NSBezierPath *p = [[NSBezierPath alloc] init];
-        [p appendBezierPathWithArcWithCenter:[v pointValue] radius:0.8 startAngle:0 endAngle:360];
-        [p fill];
+    if (self.drawPoints) {
+        [[NSColor redColor] set];
+        
+        for (NSValue *v in self.sites) {
+            NSBezierPath *p = [[NSBezierPath alloc] init];
+            [p appendBezierPathWithArcWithCenter:[v pointValue] radius:0.8 startAngle:0 endAngle:360];
+            [p fill];
+        }
     }
     
-    [[NSColor blackColor] set];
-    
-    for (Cell *c in self.cells) {
-        for (Halfedge *he in [c halfedges]) {
-            NSPoint p1 = [[[he edge] va] coord];
-            NSPoint p2 = [[[he edge] vb] coord];
-            NSBezierPath *p = [[NSBezierPath alloc] init];
-            [p setLineWidth:0.3];
-            [p moveToPoint:p1];
-            [p lineToPoint:p2];
-            [p stroke];
+    if (self.drawCells) {
+        [[NSColor blackColor] set];
+        
+        for (Cell *c in self.cells) {
+            for (Halfedge *he in [c halfedges]) {
+                NSPoint p1 = [[[he edge] va] coord];
+                NSPoint p2 = [[[he edge] vb] coord];
+                NSBezierPath *p = [[NSBezierPath alloc] init];
+                [p setLineWidth:0.3];
+                [p moveToPoint:p1];
+                [p lineToPoint:p2];
+                [p stroke];
+            }
         }
     }
     
     // Draw Dijkstra path
-    [[NSColor redColor] set];
-    
-    NSBezierPath *dij = [[NSBezierPath alloc] init];
-    [dij setLineWidth:2];
-    [dij moveToPoint:[[self.dijkstraPathPoints objectAtIndex:0] pointValue]];
-    
-    for (int i = 1; i < [self.dijkstraPathPoints count]; i++) {
-        NSPoint p = [[self.dijkstraPathPoints objectAtIndex:i] pointValue];
-        [dij lineToPoint:p];
-    }
-    
-    [dij stroke];
+//    [[NSColor redColor] set];
+//    
+//    NSBezierPath *dij = [[NSBezierPath alloc] init];
+//    [dij setLineWidth:2];
+//    [dij moveToPoint:[[self.dijkstraPathPoints objectAtIndex:0] pointValue]];
+//    
+//    for (int i = 1; i < [self.dijkstraPathPoints count]; i++) {
+//        NSPoint p = [[self.dijkstraPathPoints objectAtIndex:i] pointValue];
+//        [dij lineToPoint:p];
+//    }
+//    
+//    [dij stroke];
     
     
     [NSGraphicsContext restoreGraphicsState];

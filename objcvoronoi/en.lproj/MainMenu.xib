@@ -725,8 +725,25 @@
                             <action selector="relaxWithLloyd:" target="536" id="559"/>
                         </connections>
                     </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibc-50-Jtj">
+                        <rect key="frame" x="17" y="379" width="99" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Draw Points" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="Min-Jj-QvX">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FsR-87-T6y">
+                        <rect key="frame" x="17" y="344" width="110" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Draw Cells" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="ueU-gm-rhC">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                    </button>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="132" y="161.5"/>
         </window>
         <customObject id="494" customClass="VoronoiAppDelegate">
             <connections>
@@ -737,6 +754,8 @@
         <customObject id="536" customClass="VoronoiController">
             <connections>
                 <outlet property="drawButton" destination="537" id="556"/>
+                <outlet property="drawCellsBtn" destination="FsR-87-T6y" id="LfT-O3-35e"/>
+                <outlet property="drawPointsBtn" destination="ibc-50-Jtj" id="a3O-Tc-FP3"/>
                 <outlet property="marginEntry" destination="550" id="555"/>
                 <outlet property="numSitesEntry" destination="544" id="549"/>
                 <outlet property="relaxButton" destination="557" id="560"/>
