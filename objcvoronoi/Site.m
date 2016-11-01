@@ -65,18 +65,23 @@
     return self.coord.y;
 }
 
-+ (void)sortSites:(NSMutableArray *)siteArray
++ (NSMutableArray*)sortSites:(NSMutableArray *)siteArray
 {
-    [siteArray sortUsingSelector:@selector(compare:)];
+    NSMutableArray *sorted = [siteArray sortedArrayUsingSelector:@selector(compare:)].mutableCopy;
+    return sorted;
 }
 
-// TODO: Check that this is returning in the proper order;
 - (NSComparisonResult)compare:(Site *)s
 {
-    if (self.y < s.y) return NSOrderedDescending;
-    if (self.y > s.y) return NSOrderedAscending;
-    if (self.x < s.x) return NSOrderedDescending;
-    if (self.x > s.x) return NSOrderedAscending;
+    CGFloat ax = self.coord.x;
+    CGFloat ay = self.coord.y;
+    CGFloat bx = s.coord.x;
+    CGFloat by = s.coord.y;
+    
+    if (ay < by) return NSOrderedDescending;
+    if (ay > by) return NSOrderedAscending;
+    if (ax < bx) return NSOrderedDescending;
+    if (ax > bx) return NSOrderedAscending;
     
     return NSOrderedSame;
 }

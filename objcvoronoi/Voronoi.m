@@ -61,10 +61,10 @@ float const VORONOI_EPSILON = 0.00005;
     [self setBoundingBox:bbox];
     
     NSMutableArray *siteEvents = [[NSMutableArray alloc] initWithArray:self.sites];
-    [Site sortSites:siteEvents];
+    NSMutableArray *sortedSiteEvents = [Site sortSites:siteEvents];
 
-    Site *site = [siteEvents lastObject];
-    [siteEvents removeLastObject];
+    Site *site = [sortedSiteEvents lastObject];
+    [sortedSiteEvents removeLastObject];
     
     int siteid = 0;
     
@@ -103,8 +103,8 @@ float const VORONOI_EPSILON = 0.00005;
                 xsitey = [site y];
                 xsitex = [site x];
             }
-            site = [siteEvents lastObject];
-            [siteEvents removeLastObject];
+            site = [sortedSiteEvents lastObject];
+            [sortedSiteEvents removeLastObject];
             
         } else if (circle) {
             // remove beach section

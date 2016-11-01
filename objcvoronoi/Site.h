@@ -22,7 +22,7 @@
 - (void)setY:(float)tempY;
 - (float)y;
 
-+ (void)sortSites:(NSMutableArray *)siteArray;
++ (NSMutableArray*)sortSites:(NSMutableArray *)siteArray;
 - (NSComparisonResult)compare:(Site *)s;
 
 @end

@@ -64,8 +64,8 @@ static int identifier = 0;
 
 - (float)distanceToVertex:(Vertex *)v
 {
-    float x1 = [self coord].x;
-    float y1 = [self coord].y;
+    float x1 = [self.site coord].x;
+    float y1 = [self.site coord].y;
     float x2 = [v    coord].x;
     float y2 = [v    coord].y;
     
@@ -105,5 +105,6 @@ static int identifier = 0;
         [self.neighborKeys addObject:[otherVertex uniqueID]];
     }
 }
+
 
 @end

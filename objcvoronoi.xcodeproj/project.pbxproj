@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67173E7E1D8DBB5900B4C3B2 /* objcvoronoiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67173E7D1D8DBB5900B4C3B2 /* objcvoronoiTests.swift */; };
+		67B994B61DC81303002FC22F /* SiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B994B51DC81303002FC22F /* SiteTests.swift */; };
 		6F58B94B1526349900923BA9 /* ClayPathMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58B94A1526349900923BA9 /* ClayPathMaker.m */; };
 		6F58B94E1526959A00923BA9 /* ClayRelaxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58B94D1526959A00923BA9 /* ClayRelaxer.m */; };
 		6F7BC92E151BC2750013CDD7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7BC92D151BC2750013CDD7 /* Cocoa.framework */; };
@@ -29,7 +31,22 @@
 		6FD9DCB115225663006E3B85 /* VoronoiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD9DCB015225663006E3B85 /* VoronoiView.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		67173E801D8DBB5900B4C3B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F7BC920151BC2750013CDD7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6F7BC928151BC2750013CDD7;
+			remoteInfo = objcvoronoi;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		67173E7B1D8DBB5900B4C3B2 /* objcvoronoiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = objcvoronoiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		67173E7D1D8DBB5900B4C3B2 /* objcvoronoiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = objcvoronoiTests.swift; sourceTree = "<group>"; };
+		67173E7F1D8DBB5900B4C3B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67B994B51DC81303002FC22F /* SiteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteTests.swift; sourceTree = "<group>"; };
+		67B994B71DC818B0002FC22F /* objcvoronoi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "objcvoronoi-Bridging-Header.h"; sourceTree = "<group>"; };
 		6F58B9491526349900923BA9 /* ClayPathMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClayPathMaker.h; sourceTree = "<group>"; };
 		6F58B94A1526349900923BA9 /* ClayPathMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClayPathMaker.m; sourceTree = "<group>"; };
 		6F58B94C1526959A00923BA9 /* ClayRelaxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClayRelaxer.h; sourceTree = "<group>"; };
@@ -74,6 +91,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		67173E781D8DBB5900B4C3B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F7BC926151BC2750013CDD7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,10 +109,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		67173E7C1D8DBB5900B4C3B2 /* objcvoronoiTests */ = {
+			isa = PBXGroup;
+			children = (
+				67173E7D1D8DBB5900B4C3B2 /* objcvoronoiTests.swift */,
+				67173E7F1D8DBB5900B4C3B2 /* Info.plist */,
+				67B994B51DC81303002FC22F /* SiteTests.swift */,
+			);
+			path = objcvoronoiTests;
+			sourceTree = "<group>";
+		};
 		6F7BC91E151BC2750013CDD7 = {
 			isa = PBXGroup;
 			children = (
 				6F7BC933151BC2750013CDD7 /* objcvoronoi */,
+				67173E7C1D8DBB5900B4C3B2 /* objcvoronoiTests */,
 				6F7BC92C151BC2750013CDD7 /* Frameworks */,
 				6F7BC92A151BC2750013CDD7 /* Products */,
 			);
@@ -98,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				6F7BC929151BC2750013CDD7 /* objcvoronoi.app */,
+				67173E7B1D8DBB5900B4C3B2 /* objcvoronoiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,6 +160,7 @@
 		6F7BC933151BC2750013CDD7 /* objcvoronoi */ = {
 			isa = PBXGroup;
 			children = (
+				67B994B71DC818B0002FC22F /* objcvoronoi-Bridging-Header.h */,
 				6F7BC93F151BC2750013CDD7 /* VoronoiAppDelegate.h */,
 				6F7BC940151BC2750013CDD7 /* VoronoiAppDelegate.m */,
 				6F7BC942151BC2750013CDD7 /* MainMenu.xib */,
@@ -152,30 +189,30 @@
 		6FD9DCAB1522524F006E3B85 /* Voronoi */ = {
 			isa = PBXGroup;
 			children = (
-				6F7BC94F151BF67A0013CDD7 /* Voronoi.h */,
-				6F7BC950151BF67A0013CDD7 /* Voronoi.m */,
+				6F7BC965151C1F2C0013CDD7 /* Beachsection.h */,
+				6F7BC966151C1F2C0013CDD7 /* Beachsection.m */,
+				6F7BC96E151CE2790013CDD7 /* Cell.h */,
+				6F7BC96F151CE2790013CDD7 /* Cell.m */,
+				6F7BC968151C1F3A0013CDD7 /* CircleEvent.h */,
+				6F7BC969151C1F3A0013CDD7 /* CircleEvent.m */,
 				6F58B9491526349900923BA9 /* ClayPathMaker.h */,
 				6F58B94A1526349900923BA9 /* ClayPathMaker.m */,
 				6F58B94C1526959A00923BA9 /* ClayRelaxer.h */,
 				6F58B94D1526959A00923BA9 /* ClayRelaxer.m */,
-				6F7BC971151CE87C0013CDD7 /* VoronoiResult.h */,
-				6F7BC972151CE87C0013CDD7 /* VoronoiResult.m */,
-				6F7BC95E151C1AB90013CDD7 /* RBTree.h */,
-				6F7BC95F151C1AB90013CDD7 /* RBTree.m */,
-				6F7BC965151C1F2C0013CDD7 /* Beachsection.h */,
-				6F7BC966151C1F2C0013CDD7 /* Beachsection.m */,
-				6F7BC968151C1F3A0013CDD7 /* CircleEvent.h */,
-				6F7BC969151C1F3A0013CDD7 /* CircleEvent.m */,
-				6F7BC96B151CD4130013CDD7 /* Site.h */,
-				6F7BC96C151CD4130013CDD7 /* Site.m */,
-				6F7BC96E151CE2790013CDD7 /* Cell.h */,
-				6F7BC96F151CE2790013CDD7 /* Cell.m */,
 				6FD9DC9E1520F211006E3B85 /* Edge.h */,
 				6FD9DC9F1520F211006E3B85 /* Edge.m */,
 				6FD9DCA815221268006E3B85 /* Halfedge.h */,
 				6FD9DCA915221268006E3B85 /* Halfedge.m */,
+				6F7BC95E151C1AB90013CDD7 /* RBTree.h */,
+				6F7BC95F151C1AB90013CDD7 /* RBTree.m */,
+				6F7BC96B151CD4130013CDD7 /* Site.h */,
+				6F7BC96C151CD4130013CDD7 /* Site.m */,
 				6FD9DCA51520F72C006E3B85 /* Vertex.h */,
 				6FD9DCA61520F72C006E3B85 /* Vertex.m */,
+				6F7BC94F151BF67A0013CDD7 /* Voronoi.h */,
+				6F7BC950151BF67A0013CDD7 /* Voronoi.m */,
+				6F7BC971151CE87C0013CDD7 /* VoronoiResult.h */,
+				6F7BC972151CE87C0013CDD7 /* VoronoiResult.m */,
 			);
 			name = Voronoi;
 			sourceTree = "<group>";
@@ -183,6 +220,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		67173E7A1D8DBB5900B4C3B2 /* objcvoronoiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67173E841D8DBB5900B4C3B2 /* Build configuration list for PBXNativeTarget "objcvoronoiTests" */;
+			buildPhases = (
+				67173E771D8DBB5900B4C3B2 /* Sources */,
+				67173E781D8DBB5900B4C3B2 /* Frameworks */,
+				67173E791D8DBB5900B4C3B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				67173E811D8DBB5900B4C3B2 /* PBXTargetDependency */,
+			);
+			name = objcvoronoiTests;
+			productName = objcvoronoiTests;
+			productReference = 67173E7B1D8DBB5900B4C3B2 /* objcvoronoiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6F7BC928151BC2750013CDD7 /* objcvoronoi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F7BC947151BC2760013CDD7 /* Build configuration list for PBXNativeTarget "objcvoronoi" */;
@@ -206,8 +261,20 @@
 		6F7BC920151BC2750013CDD7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "The Perihelion Group";
+				TargetAttributes = {
+					67173E7A1D8DBB5900B4C3B2 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 27UHAFC56C;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 6F7BC928151BC2750013CDD7;
+					};
+					6F7BC928151BC2750013CDD7 = {
+						LastSwiftMigration = 0800;
+					};
+				};
 			};
 			buildConfigurationList = 6F7BC923151BC2750013CDD7 /* Build configuration list for PBXProject "objcvoronoi" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -222,11 +289,19 @@
 			projectRoot = "";
 			targets = (
 				6F7BC928151BC2750013CDD7 /* objcvoronoi */,
+				67173E7A1D8DBB5900B4C3B2 /* objcvoronoiTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		67173E791D8DBB5900B4C3B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F7BC927151BC2750013CDD7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -240,6 +315,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		67173E771D8DBB5900B4C3B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67B994B61DC81303002FC22F /* SiteTests.swift in Sources */,
+				67173E7E1D8DBB5900B4C3B2 /* objcvoronoiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F7BC925151BC2750013CDD7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -264,6 +348,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		67173E811D8DBB5900B4C3B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6F7BC928151BC2750013CDD7 /* objcvoronoi */;
+			targetProxy = 67173E801D8DBB5900B4C3B2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6F7BC936151BC2750013CDD7 /* InfoPlist.strings */ = {
@@ -293,6 +385,70 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		67173E821D8DBB5900B4C3B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 27UHAFC56C;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = objcvoronoiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.edf.objcvoronoiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "objcvoronoi/objcvoronoi-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/objcvoronoi.app/Contents/MacOS/objcvoronoi";
+			};
+			name = Debug;
+		};
+		67173E831D8DBB5900B4C3B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 27UHAFC56C;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = objcvoronoiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.edf.objcvoronoiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "objcvoronoi/objcvoronoi-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/objcvoronoi.app/Contents/MacOS/objcvoronoi";
+			};
+			name = Release;
+		};
 		6F7BC945151BC2760013CDD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -328,7 +484,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -362,7 +518,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -370,18 +526,24 @@
 		6F7BC948151BC2760013CDD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "objcvoronoi/objcvoronoi-Prefix.pch";
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "objcvoronoi/objcvoronoi-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LLVM_LTO = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.edf.objcvoronoi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "objcvoronoi/objcvoronoi-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -389,18 +551,23 @@
 		6F7BC949151BC2760013CDD7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "objcvoronoi/objcvoronoi-Prefix.pch";
 				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "objcvoronoi/objcvoronoi-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LLVM_LTO = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.edf.objcvoronoi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "objcvoronoi/objcvoronoi-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -408,6 +575,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		67173E841D8DBB5900B4C3B2 /* Build configuration list for PBXNativeTarget "objcvoronoiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67173E821D8DBB5900B4C3B2 /* Debug */,
+				67173E831D8DBB5900B4C3B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6F7BC923151BC2750013CDD7 /* Build configuration list for PBXProject "objcvoronoi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

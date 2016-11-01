@@ -13,6 +13,7 @@
 
 @interface Vertex : Site
 
+@property (strong, readwrite) Site *site;
 @property (assign, readwrite) BOOL visited;
 @property (assign, readwrite) BOOL target;
 @property (assign, readwrite) BOOL onBoundingBox;
@@ -31,5 +32,6 @@
 - (void)addEdge:(Edge *)e;
 
 - (void)calcNeighborKeys;
+
 
 @end
