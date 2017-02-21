@@ -10,5 +10,6 @@
 #define objcvoronoi_Swift_h
 
 #import "Site.h"
+#import "Vertex.h"
 
 #endif /* objcvoronoi_Swift_h */

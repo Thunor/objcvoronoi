@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		67173E7E1D8DBB5900B4C3B2 /* objcvoronoiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67173E7D1D8DBB5900B4C3B2 /* objcvoronoiTests.swift */; };
+		67A8BBD91E5BF3DE00182A1D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A8BBD81E5BF3DE00182A1D /* Images.xcassets */; };
 		67B994B61DC81303002FC22F /* SiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B994B51DC81303002FC22F /* SiteTests.swift */; };
 		6F58B94B1526349900923BA9 /* ClayPathMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58B94A1526349900923BA9 /* ClayPathMaker.m */; };
 		6F58B94E1526959A00923BA9 /* ClayRelaxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58B94D1526959A00923BA9 /* ClayRelaxer.m */; };
@@ -45,6 +46,7 @@
 		67173E7B1D8DBB5900B4C3B2 /* objcvoronoiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = objcvoronoiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		67173E7D1D8DBB5900B4C3B2 /* objcvoronoiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = objcvoronoiTests.swift; sourceTree = "<group>"; };
 		67173E7F1D8DBB5900B4C3B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67A8BBD81E5BF3DE00182A1D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		67B994B51DC81303002FC22F /* SiteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteTests.swift; sourceTree = "<group>"; };
 		67B994B71DC818B0002FC22F /* objcvoronoi-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "objcvoronoi-Bridging-Header.h"; sourceTree = "<group>"; };
 		6F58B9491526349900923BA9 /* ClayPathMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClayPathMaker.h; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				6FD9DCAF15225663006E3B85 /* VoronoiView.h */,
 				6FD9DCB015225663006E3B85 /* VoronoiView.m */,
 				6FD9DCAB1522524F006E3B85 /* Voronoi */,
+				67A8BBD81E5BF3DE00182A1D /* Images.xcassets */,
 				6F7BC934151BC2750013CDD7 /* Supporting Files */,
 			);
 			path = objcvoronoi;
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F7BC938151BC2750013CDD7 /* InfoPlist.strings in Resources */,
+				67A8BBD91E5BF3DE00182A1D /* Images.xcassets in Resources */,
 				6F7BC93E151BC2750013CDD7 /* Credits.rtf in Resources */,
 				6F7BC944151BC2760013CDD7 /* MainMenu.xib in Resources */,
 			);
@@ -526,6 +530,7 @@
 		6F7BC948151BC2760013CDD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -551,6 +556,7 @@
 		6F7BC949151BC2760013CDD7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				COMBINE_HIDPI_IMAGES = YES;

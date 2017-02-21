@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11198.2" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11198.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -732,6 +733,9 @@
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="drawPointsChanged:" target="536" id="Bwx-T9-E5j"/>
+                        </connections>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FsR-87-T6y">
                         <rect key="frame" x="17" y="344" width="110" height="20"/>
@@ -740,6 +744,20 @@
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="drawCellsChanged:" target="536" id="BI0-ik-gbh"/>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8V-hw-14T">
+                        <rect key="frame" x="17" y="308" width="96" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Draw Path" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="FG3-b6-hSo">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="drawPathChanged:" target="536" id="6D2-qG-bvm"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -755,6 +773,7 @@
             <connections>
                 <outlet property="drawButton" destination="537" id="556"/>
                 <outlet property="drawCellsBtn" destination="FsR-87-T6y" id="LfT-O3-35e"/>
+                <outlet property="drawPathBtn" destination="L8V-hw-14T" id="A7C-Pq-eTp"/>
                 <outlet property="drawPointsBtn" destination="ibc-50-Jtj" id="a3O-Tc-FP3"/>
                 <outlet property="marginEntry" destination="550" id="555"/>
                 <outlet property="numSitesEntry" destination="544" id="549"/>

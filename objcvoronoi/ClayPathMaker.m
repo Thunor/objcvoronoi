@@ -370,7 +370,6 @@
     for (NSValue *key in self.vertices) {
         Vertex *v = [self.vertices objectForKey:key];
         [v calcNeighborKeys];
-
     }
 }
 

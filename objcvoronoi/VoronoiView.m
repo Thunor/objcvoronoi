@@ -54,28 +54,38 @@
             for (Halfedge *he in [c halfedges]) {
                 NSPoint p1 = [[[he edge] va] coord];
                 NSPoint p2 = [[[he edge] vb] coord];
+                
                 NSBezierPath *p = [[NSBezierPath alloc] init];
-                [p setLineWidth:0.3];
+                [p setLineWidth:2];
                 [p moveToPoint:p1];
                 [p lineToPoint:p2];
+//                [[NSColor greenColor] setFill];
+                [p closePath];
+//                [p fill];
                 [p stroke];
+                
+                [[NSColor blueColor] setStroke];
+//                [p fill];
+                
             }
         }
     }
     
     // Draw Dijkstra path
-//    [[NSColor redColor] set];
-//    
-//    NSBezierPath *dij = [[NSBezierPath alloc] init];
-//    [dij setLineWidth:2];
-//    [dij moveToPoint:[[self.dijkstraPathPoints objectAtIndex:0] pointValue]];
-//    
-//    for (int i = 1; i < [self.dijkstraPathPoints count]; i++) {
-//        NSPoint p = [[self.dijkstraPathPoints objectAtIndex:i] pointValue];
-//        [dij lineToPoint:p];
-//    }
-//    
-//    [dij stroke];
+    if (self.drawPath) {
+        [[NSColor redColor] set];
+        
+        NSBezierPath *dij = [[NSBezierPath alloc] init];
+        [dij setLineWidth:2];
+        [dij moveToPoint:[[self.dijkstraPathPoints objectAtIndex:0] pointValue]];
+        
+        for (int i = 1; i < [self.dijkstraPathPoints count]; i++) {
+            NSPoint p = [[self.dijkstraPathPoints objectAtIndex:i] pointValue];
+            [dij lineToPoint:p];
+        }
+        
+        [dij stroke];
+    }
     
     
     [NSGraphicsContext restoreGraphicsState];

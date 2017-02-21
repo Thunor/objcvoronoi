@@ -14,5 +14,6 @@
 
 @property (nonatomic, readwrite) BOOL drawPoints;
 @property (nonatomic, readwrite) BOOL drawCells;
+@property (nonatomic, readwrite) BOOL drawPath;
 
 @end
