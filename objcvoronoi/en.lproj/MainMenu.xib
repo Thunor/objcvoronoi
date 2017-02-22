@@ -759,6 +759,17 @@
                             <action selector="drawPathChanged:" target="536" id="6D2-qG-bvm"/>
                         </connections>
                     </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V0D-Ea-O2L">
+                        <rect key="frame" x="17" y="274" width="122" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Draw Point Lines" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="swT-Vt-5I8">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="drawPointLinesChanged:" target="536" id="9yW-zl-Mrz"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <point key="canvasLocation" x="132" y="161.5"/>
@@ -774,6 +785,7 @@
                 <outlet property="drawButton" destination="537" id="556"/>
                 <outlet property="drawCellsBtn" destination="FsR-87-T6y" id="LfT-O3-35e"/>
                 <outlet property="drawPathBtn" destination="L8V-hw-14T" id="A7C-Pq-eTp"/>
+                <outlet property="drawPointLinesBtn" destination="V0D-Ea-O2L" id="xPP-Uy-eE4"/>
                 <outlet property="drawPointsBtn" destination="ibc-50-Jtj" id="a3O-Tc-FP3"/>
                 <outlet property="marginEntry" destination="550" id="555"/>
                 <outlet property="numSitesEntry" destination="544" id="549"/>

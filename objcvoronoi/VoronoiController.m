@@ -24,6 +24,7 @@
 @property(weak) IBOutlet NSButton *drawPointsBtn;
 @property(weak) IBOutlet NSButton *drawCellsBtn;
 @property(weak) IBOutlet NSButton *drawPathBtn;
+@property (weak) IBOutlet NSButton *drawPointLinesBtn;
 
 
 @property(strong, nonatomic) NSMutableArray *randomPoints;
@@ -127,6 +128,7 @@
     
     self.voronoiview.drawCells = self.drawCellsBtn.state == 1;
     self.voronoiview.drawPoints = self.drawPointsBtn.state == 1;
+    self.voronoiview.drawPointLines = self.drawPointLinesBtn.state == 1;
     
     [self.voronoiview setNeedsDisplay:YES];
 
@@ -147,6 +149,11 @@
 
 - (IBAction)drawPathChanged:(NSButton *)sender {
     self.voronoiview.drawPath = sender.state == NSOnState;
+    [self.voronoiview setNeedsDisplay:YES];
+}
+
+- (IBAction)drawPointLinesChanged:(NSButton *)sender {
+    self.voronoiview.drawPointLines = sender.state == NSOnState;
     [self.voronoiview setNeedsDisplay:YES];
 }
 
