@@ -8,7 +8,7 @@
 
 import AppKit
 import XCTest
-import objcvoronoi
+//import objcvoronoi
 
 
 class SiteTests: XCTestCase {

@@ -11,7 +11,7 @@
 
 @interface ClayPathMaker : NSObject
 
-@property (copy, readwrite) NSMutableArray *edges;
+@property (strong, readwrite) NSMutableArray *edges;
 @property (retain, readwrite) NSMutableArray *points;
 @property (assign, readwrite) NSPoint startPoint;
 @property (assign, readwrite) NSPoint endPoint;

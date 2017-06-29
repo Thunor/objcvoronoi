@@ -239,15 +239,13 @@
 
 - (Vertex *)vertexMatchingByPosition:(Vertex *)v
 {
-    float incomingX = [v x];
-    float incomingY = [v y];
+    float incomingX = v.x;
+    float incomingY = v.y;
     
     for (NSValue *key in [self.vertices allKeys]) {
         Vertex *existing = [self.vertices objectForKey:key];
         float existingX = [existing x];
         float existingY = [existing y];
-        
-        
         
         if ([ClayPathMaker equalWithEpsilonA:existingX andB:incomingX]) {
             if ([ClayPathMaker equalWithEpsilonA:existingY andB:incomingY]) {
